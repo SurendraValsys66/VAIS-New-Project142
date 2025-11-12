@@ -87,6 +87,7 @@ import { cn, Link } from "@/lib/utils";
 import { FloatingStatsWidget } from "@/components/ui/floating-stats-widget";
 import { markStepCompleted } from "@/lib/masteryStorage";
 import { useToast } from "@/hooks/use-toast";
+import AddToListDialog, { ProspectList } from "@/components/prospects/AddToListDialog";
 
 interface ProspectData {
   id: string;
