@@ -541,7 +541,7 @@ export default function WishlistProspectDetails() {
   const { toast } = useToast();
 
   // Get list from localStorage
-  const [lists] = useState<ProspectList[]>(() => {
+  const [lists, setLists] = useState<ProspectList[]>(() => {
     try {
       const raw = localStorage.getItem("prospect:lists");
       return raw ? (JSON.parse(raw) as ProspectList[]) : [];
@@ -549,6 +549,13 @@ export default function WishlistProspectDetails() {
       return [];
     }
   });
+
+  // Sync lists to localStorage
+  useEffect(() => {
+    try {
+      localStorage.setItem("prospect:lists", JSON.stringify(lists));
+    } catch {}
+  }, [lists]);
 
   const currentList = lists.find((l) => l.id === listId);
 
