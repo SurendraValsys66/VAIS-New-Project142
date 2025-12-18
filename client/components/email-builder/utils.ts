@@ -20,6 +20,7 @@ import {
   CenteredImageCardBlock,
   SplitImageCardBlock,
 } from "./types";
+import { compileHTML, sanitizeHTML } from "./htmlCompiler";
 
 export function generateId(): string {
   // Use crypto.randomUUID if available, fallback to timestamp + random
