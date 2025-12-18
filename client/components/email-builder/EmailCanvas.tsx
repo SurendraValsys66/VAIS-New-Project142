@@ -130,8 +130,10 @@ export const EmailCanvas: React.FC<EmailCanvasProps> = ({
                   <BlockRenderer
                     block={block}
                     isSelected={selectedBlockId === block.id}
+                    selectedFooterElement={selectedFooterElement}
                     onBlockUpdate={onBlockUpdate}
                     onBlockSelect={onBlockSelect}
+                    onFooterElementSelect={onFooterElementSelect}
                   />
                 </div>
               ))}
