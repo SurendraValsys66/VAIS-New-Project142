@@ -190,10 +190,10 @@ function getStyleString(tag: string, existingStyle = ""): string {
   const baseStyles = semanticTagStyles[tag] || semanticTagStyles.div;
 
   const styleObj: Record<string, string> = {
-    fontSize: baseStyles.fontSize,
-    fontWeight: baseStyles.fontWeight,
+    "font-size": baseStyles.fontSize,
+    "font-weight": baseStyles.fontWeight,
     margin: baseStyles.margin,
-    lineHeight: baseStyles.lineHeight,
+    "line-height": baseStyles.lineHeight,
   };
 
   // Parse existing inline styles
