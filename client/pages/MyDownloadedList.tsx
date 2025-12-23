@@ -1612,14 +1612,44 @@ export default function MyDownloadedList() {
               </Badge>
             </div>
 
+            <div className="mt-8 mb-6">
+              <h3 className="text-sm font-bold text-gray-900 mb-4 uppercase tracking-wider">
+                Import Instructions
+              </h3>
+            </div>
+
             <Tabs
               value={selectedCrm}
               onValueChange={(v) => setSelectedCrm(v as any)}
             >
-              <TabsList>
-                <TabsTrigger value="hubspot">HubSpot</TabsTrigger>
-                <TabsTrigger value="salesforce">Salesforce</TabsTrigger>
-                <TabsTrigger value="marketo">Marketo</TabsTrigger>
+              <TabsList className="grid w-full grid-cols-3 bg-gray-100 p-1 rounded-lg mb-6">
+                <TabsTrigger
+                  value="hubspot"
+                  className="data-[state=active]:bg-white data-[state=active]:text-orange-700 data-[state=active]:shadow-sm data-[state=active]:border-b-2 data-[state=active]:border-orange-500 rounded-md transition-all"
+                >
+                  <span className="inline-flex items-center justify-center w-5 h-5 rounded bg-[#FF7A59] text-white text-[10px] font-bold mr-2">
+                    HS
+                  </span>
+                  HubSpot
+                </TabsTrigger>
+                <TabsTrigger
+                  value="salesforce"
+                  className="data-[state=active]:bg-white data-[state=active]:text-blue-700 data-[state=active]:shadow-sm data-[state=active]:border-b-2 data-[state=active]:border-blue-500 rounded-md transition-all"
+                >
+                  <span className="inline-flex items-center justify-center w-5 h-5 rounded bg-[#00A1E0] text-white text-[10px] font-bold mr-2">
+                    SF
+                  </span>
+                  Salesforce
+                </TabsTrigger>
+                <TabsTrigger
+                  value="marketo"
+                  className="data-[state=active]:bg-white data-[state=active]:text-purple-700 data-[state=active]:shadow-sm data-[state=active]:border-b-2 data-[state=active]:border-purple-500 rounded-md transition-all"
+                >
+                  <span className="inline-flex items-center justify-center w-5 h-5 rounded bg-[#5C4BAF] text-white text-[10px] font-bold mr-2">
+                    MK
+                  </span>
+                  Marketo
+                </TabsTrigger>
               </TabsList>
 
               <TabsContent value="hubspot">
