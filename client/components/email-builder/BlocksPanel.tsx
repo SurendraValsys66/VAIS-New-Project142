@@ -170,7 +170,9 @@ const DraggableTemplateCard: React.FC<DraggableTemplateProps> = ({
 };
 
 const SectionsPanel: React.FC<SectionsPanelProps> = ({ onAddBlock }) => {
-  const [expandedSection, setExpandedSection] = useState<string | null>(null);
+  const [expandedSections, setExpandedSections] = useState<Set<string>>(
+    new Set(["Text & images", "Content sections", "Headers", "Footer & signatures"])
+  );
 
   const textImageTemplates: Template[] = [
     {
