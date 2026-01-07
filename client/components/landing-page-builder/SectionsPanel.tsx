@@ -92,6 +92,109 @@ const sectionTemplates: SectionTemplate[] = [
       </div>
     ),
   },
+  {
+    id: "template-5",
+    name: "Infinite canvas",
+    description: "Two-column section",
+    preview: (
+      <div className="bg-white border border-gray-200 rounded-xl p-6 h-40 flex gap-4">
+        <div className="flex-1 flex flex-col justify-center gap-2">
+          <div className="text-xs font-semibold text-gray-900">Infinite canvas.</div>
+          <div className="text-xs text-gray-500 line-clamp-2">
+            Design inspiration section
+          </div>
+          <div className="h-6 w-16 bg-gray-100 rounded mt-2"></div>
+        </div>
+        <div className="flex-1 flex flex-col justify-center gap-2">
+          <div className="text-xs font-semibold text-gray-900">Blazing fast.</div>
+          <div className="text-xs text-gray-500 line-clamp-2">
+            Performance optimized
+          </div>
+          <div className="h-16 bg-gray-100 rounded mt-2"></div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    id: "template-6",
+    name: "Canvas & Publish",
+    description: "Two-column layout",
+    preview: (
+      <div className="bg-white border border-gray-200 rounded-xl p-6 h-40 flex gap-4">
+        <div className="flex-1 flex flex-col justify-center items-center gap-2">
+          <div className="w-8 h-8 bg-gray-100 rounded"></div>
+          <div className="text-xs font-semibold text-gray-900">Canvas.</div>
+          <div className="text-xs text-gray-500 text-center line-clamp-2">
+            Design together
+          </div>
+        </div>
+        <div className="flex-1 flex flex-col justify-center items-center gap-2">
+          <div className="w-8 h-8 bg-gray-100 rounded-full"></div>
+          <div className="text-xs font-semibold text-gray-900">Publish.</div>
+          <div className="text-xs text-gray-500 text-center line-clamp-2">
+            Share your work
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    id: "template-7",
+    name: "Three Column",
+    description: "Design, Write, Publish",
+    preview: (
+      <div className="bg-white border border-gray-200 rounded-xl p-6 h-40 flex gap-3">
+        <div className="flex-1 flex flex-col justify-center items-center gap-2">
+          <div className="w-6 h-6 bg-gray-100 rounded"></div>
+          <div className="text-xs font-semibold text-gray-900 text-center">Design</div>
+        </div>
+        <div className="flex-1 flex flex-col justify-center items-center gap-2">
+          <div className="w-6 h-6 bg-gray-100 rounded"></div>
+          <div className="text-xs font-semibold text-gray-900 text-center">Write</div>
+        </div>
+        <div className="flex-1 flex flex-col justify-center items-center gap-2">
+          <div className="w-6 h-6 bg-gray-100 rounded"></div>
+          <div className="text-xs font-semibold text-gray-900 text-center">Publish</div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    id: "template-8",
+    name: "Statistics",
+    description: "Stats showcase",
+    preview: (
+      <div className="bg-white border border-gray-200 rounded-xl p-6 h-40 flex gap-4 items-center justify-center">
+        <div className="flex-1 flex flex-col items-center justify-center gap-1">
+          <div className="text-lg font-bold text-gray-900">30+</div>
+          <div className="text-xs text-gray-500">Templates</div>
+        </div>
+        <div className="flex-1 flex flex-col items-center justify-center gap-1">
+          <div className="text-lg font-bold text-gray-900">32+</div>
+          <div className="text-xs text-gray-500">Integrations</div>
+        </div>
+        <div className="flex-1 flex flex-col items-center justify-center gap-1">
+          <div className="text-lg font-bold text-gray-900">10K</div>
+          <div className="text-xs text-gray-500">Customers</div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    id: "template-9",
+    name: "Testimonial",
+    description: "Customer quote",
+    preview: (
+      <div className="bg-white border border-gray-200 rounded-xl p-6 h-40 flex flex-col items-center justify-center gap-4">
+        <div className="text-center">
+          <div className="text-sm font-semibold text-gray-900 leading-relaxed">
+            "Framer is one of the best web design builders I have come across"
+          </div>
+          <div className="text-xs text-gray-500 mt-3">- Danielle</div>
+        </div>
+      </div>
+    ),
+  },
 ];
 
 export const SectionsPanel: React.FC<SectionsPanelProps> = ({
