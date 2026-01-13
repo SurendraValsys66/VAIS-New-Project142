@@ -420,7 +420,8 @@ export type ContentBlock =
   | FooterWithSocialBlock
   | SpacerBlock
   | CenteredImageCardBlock
-  | SplitImageCardBlock;
+  | SplitImageCardBlock
+  | TwoColumnCardBlock;
 
 export interface EmailTemplate {
   id: string;
