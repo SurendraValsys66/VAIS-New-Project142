@@ -34,7 +34,6 @@ import {
 } from "./utils";
 import {
   Save,
-  Download,
   Eye,
   Edit,
   Trash2,
