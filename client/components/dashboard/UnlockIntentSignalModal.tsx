@@ -1,7 +1,14 @@
 import React from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Zap, CheckCircle2, BarChart3, TrendingUp, Lightbulb, Lock as LockIcon } from "lucide-react";
+import {
+  Zap,
+  CheckCircle2,
+  BarChart3,
+  TrendingUp,
+  Lightbulb,
+  Lock as LockIcon,
+} from "lucide-react";
 
 interface UnlockIntentSignalModalProps {
   open: boolean;
@@ -25,22 +32,22 @@ export default function UnlockIntentSignalModal({
     {
       icon: BarChart3,
       title: "Real-Time Intent Data",
-      description: "Powered by Bombora"
+      description: "Powered by Bombora",
     },
     {
       icon: TrendingUp,
       title: "Buying Signals",
-      description: "Track company behavior"
+      description: "Track company behavior",
     },
     {
       icon: Lightbulb,
       title: "AI-Powered Insights",
-      description: "Deep intent analysis"
+      description: "Deep intent analysis",
     },
     {
       icon: LockIcon,
       title: "Unlock All Signals",
-      description: "Access complete database"
+      description: "Access complete database",
     },
   ];
 
@@ -51,8 +58,18 @@ export default function UnlockIntentSignalModal({
           onClick={() => onOpenChange(false)}
           className="absolute top-4 right-4 z-50 text-gray-400 hover:text-gray-600 transition-colors"
         >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
+            />
           </svg>
         </button>
 
@@ -68,15 +85,21 @@ export default function UnlockIntentSignalModal({
             <div className="relative z-10">
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full mb-6">
                 <Zap className="w-4 h-4 text-white" />
-                <span className="text-xs font-semibold text-white">PREMIUM FEATURE</span>
+                <span className="text-xs font-semibold text-white">
+                  PREMIUM FEATURE
+                </span>
               </div>
 
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 leading-tight">
-                Unlock the <span className="block text-white/90">full power</span> of Intent Signals
+                Unlock the{" "}
+                <span className="block text-white/90">full power</span> of
+                Intent Signals
               </h2>
 
               <p className="text-white/90 text-base leading-relaxed mb-8">
-                Access real-time buying intent data powered by Bombora. Boost your productivity, discover high-intent prospects, and stay ahead of the competition. Experience premium insights today.
+                Access real-time buying intent data powered by Bombora. Boost
+                your productivity, discover high-intent prospects, and stay
+                ahead of the competition. Experience premium insights today.
               </p>
 
               {/* Visual showcase */}
@@ -84,11 +107,17 @@ export default function UnlockIntentSignalModal({
                 <div className="flex items-center justify-center aspect-video bg-gradient-to-br from-white/10 to-white/5 rounded-lg">
                   <div className="text-center">
                     <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm mb-3">
-                      <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <svg
+                        className="w-8 h-8 text-white"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
                         <path d="M8 5v14l11-7z" />
                       </svg>
                     </div>
-                    <p className="text-white/80 text-sm font-medium">See premium features</p>
+                    <p className="text-white/80 text-sm font-medium">
+                      See premium features
+                    </p>
                   </div>
                 </div>
               </div>
@@ -127,10 +156,17 @@ export default function UnlockIntentSignalModal({
               {/* Credit info */}
               <div className="bg-gradient-to-r from-orange-50 to-orange-100/50 border border-orange-200 rounded-lg p-4 mb-8">
                 <p className="text-sm text-gray-700">
-                  <span className="font-semibold text-gray-900">Credits remaining:</span>
+                  <span className="font-semibold text-gray-900">
+                    Credits remaining:
+                  </span>
                   <br />
-                  <span className="text-lg font-bold text-valasys-orange">48,256 credits</span>
-                  <span className="text-gray-600"> • Each unlock uses 5 credits</span>
+                  <span className="text-lg font-bold text-valasys-orange">
+                    48,256 credits
+                  </span>
+                  <span className="text-gray-600">
+                    {" "}
+                    • Each unlock uses 5 credits
+                  </span>
                 </p>
               </div>
             </div>
