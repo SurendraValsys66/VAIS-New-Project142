@@ -195,73 +195,72 @@ export default function IntentSignalPopover({
                   <span>Intent Signal Breakdown</span>
                 </h3>
                 <div
-                  className="h-56 border border-gray-200 rounded-lg p-3 bg-gradient-to-br from-gray-50 to-white cursor-pointer hover:border-valasys-orange hover:shadow-md transition-all duration-300 overflow-hidden"
-                onClick={handleChartClick}
-              >
-                <ChartContainer config={chartConfig}>
-                  <LineChart
-                    data={chartData}
-                    margin={{
-                      top: 5,
-                      right: 30,
-                      left: -20,
-                      bottom: 5,
-                    }}
-                  >
-                    <CartesianGrid
-                      strokeDasharray="3 3"
-                      className="opacity-20"
-                      vertical={false}
-                    />
-                    <XAxis
-                      dataKey="week"
-                      fontSize={12}
-                      tickLine={false}
-                      axisLine={false}
-                      tick={{ fill: "#666" }}
-                    />
-                    <YAxis
-                      hide={false}
-                      fontSize={12}
-                      tickLine={false}
-                      axisLine={false}
-                      tick={{ fill: "#999" }}
-                      width={30}
-                    />
-                    <ChartTooltip content={<ChartTooltipContent />} />
-                    <Line
-                      type="monotone"
-                      dataKey="compositeScore"
-                      stroke={chartConfig.compositeScore.color}
-                      strokeWidth={2.5}
-                      dot={{
-                        fill: chartConfig.compositeScore.color,
-                        strokeWidth: 2,
-                        r: 5,
+                  className="border border-gray-200 rounded-lg bg-gradient-to-br from-gray-50 to-white cursor-pointer hover:border-valasys-orange hover:shadow-md transition-all duration-300 overflow-hidden"
+                  onClick={handleChartClick}
+                  style={{ height: "280px" }}
+                >
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart
+                      data={chartData}
+                      margin={{
+                        top: 10,
+                        right: 30,
+                        left: 0,
+                        bottom: 10,
                       }}
-                      activeDot={{
-                        r: 7,
-                      }}
-                      isAnimationActive={true}
-                    />
-                    <Line
-                      type="monotone"
-                      dataKey="deltaScore"
-                      stroke={chartConfig.deltaScore.color}
-                      strokeWidth={2.5}
-                      dot={{
-                        fill: chartConfig.deltaScore.color,
-                        strokeWidth: 2,
-                        r: 5,
-                      }}
-                      activeDot={{
-                        r: 7,
-                      }}
-                      isAnimationActive={true}
-                    />
-                  </LineChart>
-                </ChartContainer>
-              </div>
+                    >
+                      <CartesianGrid
+                        strokeDasharray="3 3"
+                        className="opacity-20"
+                        vertical={false}
+                      />
+                      <XAxis
+                        dataKey="week"
+                        fontSize={11}
+                        tickLine={false}
+                        axisLine={false}
+                        tick={{ fill: "#999" }}
+                      />
+                      <YAxis
+                        fontSize={11}
+                        tickLine={false}
+                        axisLine={false}
+                        tick={{ fill: "#999" }}
+                      />
+                      <ChartTooltip content={<ChartTooltipContent />} />
+                      <Line
+                        type="monotone"
+                        dataKey="compositeScore"
+                        stroke={chartConfig.compositeScore.color}
+                        strokeWidth={2.5}
+                        dot={{
+                          fill: chartConfig.compositeScore.color,
+                          strokeWidth: 2,
+                          r: 4,
+                        }}
+                        activeDot={{
+                          r: 6,
+                        }}
+                        isAnimationActive={true}
+                      />
+                      <Line
+                        type="monotone"
+                        dataKey="deltaScore"
+                        stroke={chartConfig.deltaScore.color}
+                        strokeWidth={2.5}
+                        dot={{
+                          fill: chartConfig.deltaScore.color,
+                          strokeWidth: 2,
+                          r: 4,
+                        }}
+                        activeDot={{
+                          r: 6,
+                        }}
+                        isAnimationActive={true}
+                      />
+                    </LineChart>
+                  </ResponsiveContainer>
+                </div>
                 <p className="text-xs text-gray-500 mt-2 text-center hover:text-valasys-orange transition-colors cursor-pointer">
                   Click to view full breakdown →
                 </p>
