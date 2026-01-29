@@ -95,8 +95,9 @@ export default function IntentSignalPopover({
 }: IntentSignalPopoverProps) {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const chartData = generateChartData(data);
 
-  const handleExpandClick = () => {
+  const handleChartClick = () => {
     setIsPopoverOpen(false);
     setIsModalOpen(true);
   };
@@ -105,7 +106,7 @@ export default function IntentSignalPopover({
     <>
       <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
         <PopoverTrigger asChild>{children}</PopoverTrigger>
-        <PopoverContent className="w-80 p-4" align="start" side="right">
+        <PopoverContent className="w-96 p-4" align="start" side="right">
           <div className="space-y-4">
             {/* Company Header */}
             <div className="border-b pb-3">
@@ -131,7 +132,7 @@ export default function IntentSignalPopover({
                   <span>
                     VAIS:{" "}
                     <span className="font-semibold text-valasys-orange">
-                      {data.vais.toFixed(1)}
+                      {data.vais}%
                     </span>
                   </span>
                 </div>
@@ -146,77 +147,106 @@ export default function IntentSignalPopover({
               </div>
             </div>
 
-            {/* Key Metrics */}
-            <div className="space-y-2">
-              <h5 className="text-xs font-semibold text-gray-700">Metrics</h5>
-              <div className="grid grid-cols-3 gap-2">
-                <div className="bg-blue-50 p-2 rounded border border-blue-200">
-                  <div className="text-blue-600 font-medium text-xs">
-                    Composite
-                  </div>
-                  <div className="text-lg font-bold text-blue-800">
-                    {data.compositeScore}
-                  </div>
-                </div>
-                <div className="bg-green-50 p-2 rounded border border-green-200">
-                  <div className="text-green-600 font-medium text-xs">
-                    Delta
-                  </div>
-                  <div className="text-lg font-bold text-green-800">
-                    {data.deltaScore.toFixed(1)}
-                  </div>
-                </div>
-                <div className="bg-yellow-50 p-2 rounded border border-yellow-200">
-                  <div className="text-yellow-600 font-medium text-xs">
-                    Topics
-                  </div>
-                  <div className="text-lg font-bold text-yellow-800">
-                    {data.matchedTopics}
-                  </div>
-                </div>
+            {/* Intent Signal Breakdown Chart */}
+            <div>
+              <h5 className="text-sm font-semibold mb-3">Intent Signal Breakdown</h5>
+              <div
+                className="h-48 border rounded-lg p-3 bg-white cursor-pointer hover:bg-gray-50 transition-colors"
+                onClick={handleChartClick}
+              >
+                <ChartContainer config={chartConfig}>
+                  <LineChart
+                    data={chartData}
+                    margin={{
+                      top: 5,
+                      right: 20,
+                      left: 0,
+                      bottom: 0,
+                    }}
+                  >
+                    <CartesianGrid
+                      strokeDasharray="3 3"
+                      className="opacity-20"
+                      vertical={false}
+                    />
+                    <XAxis
+                      dataKey="week"
+                      fontSize={11}
+                      tickLine={false}
+                      axisLine={false}
+                      tick={{ fill: "#666" }}
+                    />
+                    <YAxis
+                      hide={false}
+                      fontSize={11}
+                      tickLine={false}
+                      axisLine={false}
+                      tick={{ fill: "#999" }}
+                      width={25}
+                    />
+                    <ChartTooltip content={<ChartTooltipContent />} />
+                    <Line
+                      type="monotone"
+                      dataKey="compositeScore"
+                      stroke={chartConfig.compositeScore.color}
+                      strokeWidth={2}
+                      dot={{
+                        fill: chartConfig.compositeScore.color,
+                        strokeWidth: 2,
+                        r: 4,
+                      }}
+                      activeDot={{
+                        r: 6,
+                      }}
+                      isAnimationActive={true}
+                    />
+                    <Line
+                      type="monotone"
+                      dataKey="deltaScore"
+                      stroke={chartConfig.deltaScore.color}
+                      strokeWidth={2}
+                      dot={{
+                        fill: chartConfig.deltaScore.color,
+                        strokeWidth: 2,
+                        r: 4,
+                      }}
+                      activeDot={{
+                        r: 6,
+                      }}
+                      isAnimationActive={true}
+                    />
+                  </LineChart>
+                </ChartContainer>
               </div>
             </div>
 
-            {/* Related Topics Preview */}
-            {data.relatedTopics.length > 0 && (
+            {/* Topics Section */}
+            <div>
+              <h5 className="text-sm font-semibold mb-3">Topics</h5>
               <div className="space-y-2">
-                <h5 className="text-xs font-semibold text-gray-700">
-                  High Intent Topics
-                </h5>
-                <div className="space-y-1 max-h-32 overflow-y-auto">
-                  {data.relatedTopics.slice(0, 3).map((topic, index) => (
+                {data.relatedTopics.slice(0, 2).map((topic, index) => {
+                  const scores = [65, 63, 58];
+                  const score = scores[index] || Math.floor(Math.random() * 40 + 60);
+                  return (
                     <div
                       key={index}
-                      className="flex items-center justify-between p-1 text-xs text-gray-600 hover:bg-gray-50 rounded"
+                      className="flex items-center justify-between p-2 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors text-xs"
                     >
-                      <span>{topic}</span>
+                      <span className="text-gray-700 font-medium">{topic}</span>
                       <div className="w-1.5 h-1.5 bg-valasys-orange rounded-full"></div>
                     </div>
-                  ))}
-                  {data.relatedTopics.length > 3 && (
-                    <div className="text-xs text-gray-500 italic pt-1">
-                      +{data.relatedTopics.length - 3} more topics
-                    </div>
-                  )}
-                </div>
+                  );
+                })}
               </div>
-            )}
-
-            {/* Expand Button */}
-            <Button
-              onClick={handleExpandClick}
-              variant="outline"
-              size="sm"
-              className="w-full text-xs"
-            >
-              View Full Breakdown
-              <ChevronRight className="w-3 h-3 ml-1" />
-            </Button>
+              <div className="text-xs text-gray-500 mt-2">
+                Showing all topics
+              </div>
+            </div>
           </div>
         </PopoverContent>
       </Popover>
 
-      {/* Full Modal - shown when user clicks "View Full Breakdown" */}
+      {/* Full Modal - shown when user clicks on chart */}
       <IntentSignalModal
         data={data}
         isOpen={isModalOpen}
