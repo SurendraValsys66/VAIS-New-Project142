@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Zap, CheckCircle2, BarChart3, TrendingUp, Lightbulb, Lock as LockIcon } from "lucide-react";
