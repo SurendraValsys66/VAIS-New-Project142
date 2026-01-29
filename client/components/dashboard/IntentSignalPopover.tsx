@@ -89,55 +89,96 @@ export default function IntentSignalPopover({
   data,
   children,
 }: IntentSignalPopoverProps) {
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const chartData = generateChartData(data);
 
   const handleChartClick = () => {
-    setIsPopoverOpen(false);
+    setIsPanelOpen(false);
     setIsModalOpen(true);
+  };
+
+  const closePanelClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsPanelOpen(false);
   };
 
   return (
     <>
-      <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
-        <PopoverTrigger asChild>{children}</PopoverTrigger>
-        <PopoverContent className="w-96 p-4" align="start" side="right">
-          <div className="space-y-4">
+      {/* Trigger - Clone and add onClick handler */}
+      <div
+        onClick={() => setIsPanelOpen(true)}
+        className="cursor-pointer"
+      >
+        {children}
+      </div>
+
+      {/* Right-side Slide-in Panel */}
+      <div
+        className={cn(
+          "fixed inset-0 z-50",
+          isPanelOpen ? "pointer-events-auto" : "pointer-events-none",
+        )}
+      >
+        {/* Overlay */}
+        <div
+          className={cn(
+            "absolute inset-0 bg-black/30 transition-opacity",
+            isPanelOpen ? "opacity-100" : "opacity-0",
+          )}
+          onClick={() => setIsPanelOpen(false)}
+        />
+
+        {/* Panel */}
+        <div
+          className={cn(
+            "absolute right-0 top-0 h-full w-[50%] max-w-2xl bg-white shadow-xl transition-transform duration-300 overflow-auto",
+            isPanelOpen ? "translate-x-0" : "translate-x-full",
+          )}
+        >
+          <div className="p-6 space-y-6">
+            {/* Close Button */}
+            <div className="flex justify-end">
+              <button
+                onClick={closePanelClick}
+                className="w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition-colors"
+              >
+                <X className="w-4 h-4 text-gray-600" />
+              </button>
+            </div>
+
             {/* Company Header */}
-            <div className="border-b pb-3">
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center space-x-2">
-                  <Building2 className="w-4 h-4 text-valasys-orange" />
-                  <h4 className="text-sm font-bold text-gray-900">
+            <div className="border-b pb-4">
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center space-x-3">
+                  <Building2 className="w-5 h-5 text-valasys-orange" />
+                  <h3 className="text-lg font-bold text-gray-900">
                     {data.companyName}
-                  </h4>
+                  </h3>
                 </div>
                 <Badge
                   className={cn(
-                    "text-xs",
+                    "text-xs px-3 py-1",
                     getIntentSignalColor(data.intentSignal),
                   )}
                 >
                   {data.intentSignal}
                 </Badge>
               </div>
-              <div className="flex flex-wrap items-center gap-3 text-xs text-gray-600">
-                <div className="flex items-center space-x-1">
-                  <Target className="w-3 h-3 text-valasys-orange" />
-                  <span>
-                    VAIS:{" "}
-                    <span className="font-semibold text-valasys-orange">
-                      {data.vais}%
-                    </span>
+              <div className="flex flex-wrap items-center gap-6 text-sm text-gray-700">
+                <div className="flex items-center space-x-2">
+                  <Target className="w-4 h-4 text-valasys-orange" />
+                  <span>VAIS:</span>
+                  <span className="font-semibold text-valasys-orange">
+                    {data.vais}%
                   </span>
                 </div>
-                <div className="flex items-center space-x-1">
-                  <DollarSign className="w-3 h-3 text-green-600" />
+                <div className="flex items-center space-x-2">
+                  <DollarSign className="w-4 h-4 text-green-600" />
                   <span>{data.revenue}</span>
                 </div>
-                <div className="flex items-center space-x-1">
-                  <MapPin className="w-3 h-3 text-blue-600" />
+                <div className="flex items-center space-x-2">
+                  <MapPin className="w-4 h-4 text-blue-600" />
                   <span>{data.city}</span>
                 </div>
               </div>
@@ -145,9 +186,9 @@ export default function IntentSignalPopover({
 
             {/* Intent Signal Breakdown Chart */}
             <div>
-              <h5 className="text-sm font-semibold mb-3">Intent Signal Breakdown</h5>
+              <h4 className="text-sm font-semibold mb-4">Intent Signal Breakdown</h4>
               <div
-                className="h-48 border rounded-lg p-3 bg-white cursor-pointer hover:bg-gray-50 transition-colors"
+                className="h-64 border rounded-lg p-4 bg-white cursor-pointer hover:bg-gray-50 transition-colors"
                 onClick={handleChartClick}
               >
                 <ChartContainer config={chartConfig}>
@@ -155,9 +196,9 @@ export default function IntentSignalPopover({
                     data={chartData}
                     margin={{
                       top: 5,
-                      right: 20,
-                      left: 0,
-                      bottom: 0,
+                      right: 30,
+                      left: -20,
+                      bottom: 5,
                     }}
                   >
                     <CartesianGrid
@@ -167,18 +208,18 @@ export default function IntentSignalPopover({
                     />
                     <XAxis
                       dataKey="week"
-                      fontSize={11}
+                      fontSize={12}
                       tickLine={false}
                       axisLine={false}
                       tick={{ fill: "#666" }}
                     />
                     <YAxis
                       hide={false}
-                      fontSize={11}
+                      fontSize={12}
                       tickLine={false}
                       axisLine={false}
                       tick={{ fill: "#999" }}
-                      width={25}
+                      width={30}
                     />
                     <ChartTooltip content={<ChartTooltipContent />} />
                     <Line
@@ -189,10 +230,10 @@ export default function IntentSignalPopover({
                       dot={{
                         fill: chartConfig.compositeScore.color,
                         strokeWidth: 2,
-                        r: 4,
+                        r: 5,
                       }}
                       activeDot={{
-                        r: 6,
+                        r: 7,
                       }}
                       isAnimationActive={true}
                     />
@@ -204,10 +245,10 @@ export default function IntentSignalPopover({
                       dot={{
                         fill: chartConfig.deltaScore.color,
                         strokeWidth: 2,
-                        r: 4,
+                        r: 5,
                       }}
                       activeDot={{
-                        r: 6,
+                        r: 7,
                       }}
                       isAnimationActive={true}
                     />
@@ -217,30 +258,32 @@ export default function IntentSignalPopover({
             </div>
 
             {/* Topics Section */}
-            <div>
-              <h5 className="text-sm font-semibold mb-3">Topics</h5>
+            <div className="border-t pt-4">
+              <h5 className="text-sm font-semibold mb-4">Topics</h5>
               <div className="space-y-2">
-                {data.relatedTopics.slice(0, 2).map((topic, index) => {
+                {data.relatedTopics.slice(0, 3).map((topic, index) => {
                   const scores = [65, 63, 58];
                   const score = scores[index] || Math.floor(Math.random() * 40 + 60);
                   return (
                     <div
                       key={index}
-                      className="flex items-center justify-between p-2 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors text-xs"
+                      className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
                     >
-                      <span className="text-gray-700 font-medium">{topic}</span>
-                      <div className="w-1.5 h-1.5 bg-valasys-orange rounded-full"></div>
+                      <span className="text-sm text-gray-700 font-medium">{topic}</span>
+                      <Badge className="bg-yellow-100 text-yellow-800 hover:bg-yellow-200">
+                        {score}
+                      </Badge>
                     </div>
                   );
                 })}
               </div>
-              <div className="text-xs text-gray-500 mt-2">
+              <div className="text-xs text-gray-500 mt-3">
                 Showing all topics
               </div>
             </div>
           </div>
-        </PopoverContent>
-      </Popover>
+        </div>
+      </div>
 
       {/* Full Modal - shown when user clicks on chart */}
       <IntentSignalModal
