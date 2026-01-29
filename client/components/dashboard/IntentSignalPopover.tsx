@@ -44,6 +44,34 @@ interface IntentSignalPopoverProps {
   children: React.ReactNode;
 }
 
+const chartConfig = {
+  compositeScore: {
+    label: "Composite Score",
+    color: "#EF4444", // Red/Orange color
+  },
+  deltaScore: {
+    label: "Delta Score",
+    color: "#6366F1", // Indigo/Blue color
+  },
+};
+
+const generateChartData = (intentData: IntentSignalData) => {
+  const baseData = [];
+  const compositeBase = intentData.compositeScore;
+  const deltaBase = intentData.deltaScore;
+
+  // Generate 7 weeks of data
+  for (let i = 0; i < 7; i++) {
+    const variation = (i / 6) * 0.6; // Progressive increase from week 1 to week 7
+    baseData.push({
+      week: `week${i + 1}`,
+      compositeScore: Math.max(0, Math.round(compositeBase * (0.2 + variation))),
+      deltaScore: Math.max(0, Math.round(deltaBase * (0.2 + variation))),
+    });
+  }
+  return baseData;
+};
+
 const getIntentSignalColor = (signal: string) => {
   switch (signal) {
     case "Super Strong":
