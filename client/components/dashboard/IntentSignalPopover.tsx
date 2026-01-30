@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Building2, MapPin, DollarSign, Target, X } from "lucide-react";
+import { Building2, MapPin, DollarSign, Target, X, TrendingUp, Zap, Activity, Spark } from "lucide-react";
 import { cn } from "@/lib/utils";
 import IntentSignalModal from "./IntentSignalModal";
 import {
@@ -15,6 +15,8 @@ import {
   YAxis,
   CartesianGrid,
   ResponsiveContainer,
+  Area,
+  AreaChart,
 } from "recharts";
 
 interface IntentSignalData {
