@@ -295,135 +295,153 @@ export default function IntentSignalPopover({
             </div>
           </div>
 
-          {/* Content Area */}
-          <div className="flex-1 overflow-auto p-5">
-            <div className="space-y-6">
-              {/* Intent Signal Breakdown Chart */}
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-base font-bold text-gray-900 flex items-center space-x-2">
-                    <div className="w-1 h-6 bg-gradient-to-b from-valasys-orange to-orange-500 rounded-full"></div>
-                    <span>
-                      {selectedTopic ? `${selectedTopic} Intent Trend` : "Intent Signal Trend"}
-                    </span>
-                  </h3>
-                  <div className="flex items-center space-x-2 text-xs">
-                    <span className="text-gray-500">7-week view</span>
-                    <Activity className="w-3.5 h-3.5 text-emerald-500" />
-                    {selectedTopic && (
-                      <button
-                        onClick={() => setSelectedTopic(undefined)}
-                        className="ml-2 px-2 py-1 text-valasys-orange hover:bg-orange-50 rounded transition-colors"
-                      >
-                        ✕ Clear
-                      </button>
-                    )}
-                  </div>
+          {/* Content Area - Flexbox layout with fixed chart and scrollable content */}
+          <div className="flex-1 flex flex-col overflow-hidden">
+            {/* Fixed Intent Signal Trend Chart Section */}
+            <div className="flex-shrink-0 border-b border-gray-200 bg-white p-5">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-base font-bold text-gray-900 flex items-center space-x-2">
+                  <div className="w-1 h-6 bg-gradient-to-b from-valasys-orange to-orange-500 rounded-full"></div>
+                  <span>
+                    {selectedTopic ? `${selectedTopic} Intent Trend` : "Intent Signal Trend"}
+                  </span>
+                </h3>
+                <div className="flex items-center space-x-2 text-xs">
+                  <span className="text-gray-500">7-week view</span>
+                  <Activity className="w-3.5 h-3.5 text-emerald-500" />
+                  {selectedTopic && (
+                    <button
+                      onClick={() => setSelectedTopic(undefined)}
+                      className="ml-2 px-2 py-1 text-valasys-orange hover:bg-orange-50 rounded transition-colors"
+                    >
+                      ✕ Clear
+                    </button>
+                  )}
                 </div>
-                <div
-                  className="border border-gray-200 rounded-xl bg-gradient-to-br from-slate-50 to-white cursor-pointer hover:border-valasys-orange hover:shadow-lg transition-all duration-300 overflow-hidden group"
-                  onClick={handleChartClick}
-                  style={{ height: "320px" }}
+              </div>
+              <div
+                className="border border-gray-200 rounded-xl bg-gradient-to-br from-slate-50 to-white cursor-pointer hover:border-valasys-orange hover:shadow-lg transition-all duration-300 overflow-hidden group"
+                onClick={handleChartClick}
+                style={{ height: "320px" }}
+              >
+                <ChartContainer
+                  config={chartConfig}
+                  className="w-full h-full"
                 >
-                  <ChartContainer
-                    config={chartConfig}
-                    className="w-full h-full"
-                  >
-                    <ResponsiveContainer width="100%" height="100%">
-                      <AreaChart
-                        data={chartData}
-                        margin={{
-                          top: 15,
-                          right: 30,
-                          left: -5,
-                          bottom: 15,
-                        }}
-                      >
-                        <defs>
-                          <linearGradient
-                            id="colorComposite"
-                            x1="0"
-                            y1="0"
-                            x2="0"
-                            y2="1"
-                          >
-                            <stop
-                              offset="5%"
-                              stopColor="#EF4444"
-                              stopOpacity={0.3}
-                            />
-                            <stop
-                              offset="95%"
-                              stopColor="#EF4444"
-                              stopOpacity={0}
-                            />
-                          </linearGradient>
-                          <linearGradient
-                            id="colorDelta"
-                            x1="0"
-                            y1="0"
-                            x2="0"
-                            y2="1"
-                          >
-                            <stop
-                              offset="5%"
-                              stopColor="#6366F1"
-                              stopOpacity={0.3}
-                            />
-                            <stop
-                              offset="95%"
-                              stopColor="#6366F1"
-                              stopOpacity={0}
-                            />
-                          </linearGradient>
-                          <linearGradient
-                            id="colorScore"
-                            x1="0"
-                            y1="0"
-                            x2="0"
-                            y2="1"
-                          >
-                            <stop
-                              offset="5%"
-                              stopColor="#F59E0B"
-                              stopOpacity={0.3}
-                            />
-                            <stop
-                              offset="95%"
-                              stopColor="#F59E0B"
-                              stopOpacity={0}
-                            />
-                          </linearGradient>
-                        </defs>
-                        <CartesianGrid
-                          strokeDasharray="3 3"
-                          className="opacity-10"
-                          vertical={false}
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart
+                      data={chartData}
+                      margin={{
+                        top: 15,
+                        right: 30,
+                        left: -5,
+                        bottom: 15,
+                      }}
+                    >
+                      <defs>
+                        <linearGradient
+                          id="colorComposite"
+                          x1="0"
+                          y1="0"
+                          x2="0"
+                          y2="1"
+                        >
+                          <stop
+                            offset="5%"
+                            stopColor="#EF4444"
+                            stopOpacity={0.3}
+                          />
+                          <stop
+                            offset="95%"
+                            stopColor="#EF4444"
+                            stopOpacity={0}
+                          />
+                        </linearGradient>
+                        <linearGradient
+                          id="colorDelta"
+                          x1="0"
+                          y1="0"
+                          x2="0"
+                          y2="1"
+                        >
+                          <stop
+                            offset="5%"
+                            stopColor="#6366F1"
+                            stopOpacity={0.3}
+                          />
+                          <stop
+                            offset="95%"
+                            stopColor="#6366F1"
+                            stopOpacity={0}
+                          />
+                        </linearGradient>
+                        <linearGradient
+                          id="colorScore"
+                          x1="0"
+                          y1="0"
+                          x2="0"
+                          y2="1"
+                        >
+                          <stop
+                            offset="5%"
+                            stopColor="#F59E0B"
+                            stopOpacity={0.3}
+                          />
+                          <stop
+                            offset="95%"
+                            stopColor="#F59E0B"
+                            stopOpacity={0}
+                          />
+                        </linearGradient>
+                      </defs>
+                      <CartesianGrid
+                        strokeDasharray="3 3"
+                        className="opacity-10"
+                        vertical={false}
+                      />
+                      <XAxis
+                        dataKey="week"
+                        fontSize={12}
+                        tickLine={false}
+                        axisLine={false}
+                        tick={{ fill: "#999", fontSize: 12 }}
+                      />
+                      <YAxis
+                        fontSize={12}
+                        tickLine={false}
+                        axisLine={false}
+                        tick={{ fill: "#999", fontSize: 12 }}
+                      />
+                      <ChartTooltip content={<ChartTooltipContent />} />
+                      {selectedTopic ? (
+                        <Area
+                          type="monotone"
+                          dataKey="score"
+                          stroke="#F59E0B"
+                          fillOpacity={1}
+                          fill="url(#colorScore)"
+                          strokeWidth={2.5}
+                          dot={{
+                            fill: "#F59E0B",
+                            strokeWidth: 2,
+                            r: 4,
+                          }}
+                          activeDot={{
+                            r: 6,
+                          }}
+                          isAnimationActive={true}
                         />
-                        <XAxis
-                          dataKey="week"
-                          fontSize={12}
-                          tickLine={false}
-                          axisLine={false}
-                          tick={{ fill: "#999", fontSize: 12 }}
-                        />
-                        <YAxis
-                          fontSize={12}
-                          tickLine={false}
-                          axisLine={false}
-                          tick={{ fill: "#999", fontSize: 12 }}
-                        />
-                        <ChartTooltip content={<ChartTooltipContent />} />
-                        {selectedTopic ? (
+                      ) : (
+                        <>
                           <Area
                             type="monotone"
-                            dataKey="score"
-                            stroke="#F59E0B"
+                            dataKey="compositeScore"
+                            stroke={chartConfig.compositeScore.color}
                             fillOpacity={1}
-                            fill="url(#colorScore)"
+                            fill="url(#colorComposite)"
                             strokeWidth={2.5}
                             dot={{
-                              fill: "#F59E0B",
+                              fill: chartConfig.compositeScore.color,
                               strokeWidth: 2,
                               r: 4,
                             }}
@@ -432,154 +450,139 @@ export default function IntentSignalPopover({
                             }}
                             isAnimationActive={true}
                           />
-                        ) : (
-                          <>
-                            <Area
-                              type="monotone"
-                              dataKey="compositeScore"
-                              stroke={chartConfig.compositeScore.color}
-                              fillOpacity={1}
-                              fill="url(#colorComposite)"
-                              strokeWidth={2.5}
-                              dot={{
-                                fill: chartConfig.compositeScore.color,
-                                strokeWidth: 2,
-                                r: 4,
-                              }}
-                              activeDot={{
-                                r: 6,
-                              }}
-                              isAnimationActive={true}
-                            />
-                            <Area
-                              type="monotone"
-                              dataKey="deltaScore"
-                              stroke={chartConfig.deltaScore.color}
-                              fillOpacity={1}
-                              fill="url(#colorDelta)"
-                              strokeWidth={2.5}
-                              dot={{
-                                fill: chartConfig.deltaScore.color,
-                                strokeWidth: 2,
-                                r: 4,
-                              }}
-                              activeDot={{
-                                r: 6,
-                              }}
-                              isAnimationActive={true}
-                            />
-                          </>
-                        )}
-                      </AreaChart>
-                    </ResponsiveContainer>
-                  </ChartContainer>
-                </div>
-                <div className="flex items-center justify-center mt-4">
-                  {selectedTopic ? (
-                    <div className="p-2.5 bg-amber-50 rounded-lg border border-amber-100 w-fit">
-                      <div className="text-center">
-                        <p className="text-xs text-gray-600 font-medium">
-                          {selectedTopic} Intent Score
-                        </p>
-                        <p className="text-xs font-bold text-gray-900">
-                          ↑ 24% week-over-week
-                        </p>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="flex items-center space-x-4 p-2.5 bg-blue-50 rounded-lg border border-blue-100 w-fit">
-                      <div className="text-center">
-                        <p className="text-xs text-gray-600 font-medium">
-                          Composite Score
-                        </p>
-                        <p className="text-xs font-bold text-gray-900">
-                          ↑ 42% week-over-week
-                        </p>
-                      </div>
-                      <div className="w-px h-6 bg-gray-300"></div>
-                      <div className="text-center">
-                        <p className="text-xs text-gray-600 font-medium">
-                          Delta Score
-                        </p>
-                        <p className="text-xs font-bold text-gray-900">
-                          ↑ 18% week-over-week
-                        </p>
-                      </div>
-                    </div>
-                  )}
-                </div>
+                          <Area
+                            type="monotone"
+                            dataKey="deltaScore"
+                            stroke={chartConfig.deltaScore.color}
+                            fillOpacity={1}
+                            fill="url(#colorDelta)"
+                            strokeWidth={2.5}
+                            dot={{
+                              fill: chartConfig.deltaScore.color,
+                              strokeWidth: 2,
+                              r: 4,
+                            }}
+                            activeDot={{
+                              r: 6,
+                            }}
+                            isAnimationActive={true}
+                          />
+                        </>
+                      )}
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </ChartContainer>
               </div>
+              <div className="flex items-center justify-center mt-4">
+                {selectedTopic ? (
+                  <div className="p-2.5 bg-amber-50 rounded-lg border border-amber-100 w-fit">
+                    <div className="text-center">
+                      <p className="text-xs text-gray-600 font-medium">
+                        {selectedTopic} Intent Score
+                      </p>
+                      <p className="text-xs font-bold text-gray-900">
+                        ↑ 24% week-over-week
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex items-center space-x-4 p-2.5 bg-blue-50 rounded-lg border border-blue-100 w-fit">
+                    <div className="text-center">
+                      <p className="text-xs text-gray-600 font-medium">
+                        Composite Score
+                      </p>
+                      <p className="text-xs font-bold text-gray-900">
+                        ↑ 42% week-over-week
+                      </p>
+                    </div>
+                    <div className="w-px h-6 bg-gray-300"></div>
+                    <div className="text-center">
+                      <p className="text-xs text-gray-600 font-medium">
+                        Delta Score
+                      </p>
+                      <p className="text-xs font-bold text-gray-900">
+                        ↑ 18% week-over-week
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
 
-              {/* Topics Section */}
-              <div>
-                <h3 className="text-sm font-bold text-gray-900 mb-2.5 flex items-center space-x-2">
-                  <div className="w-1 h-4 bg-gradient-to-b from-valasys-orange to-orange-500 rounded-full"></div>
-                  <span>Top Topics</span>
-                  <span className="text-xs font-normal text-gray-500">(Click to view specific intent trend)</span>
-                </h3>
-                <div className="space-y-1.5">
-                  {data.relatedTopics.slice(0, 3).map((topic, index) => {
-                    const scores = [65, 63, 58];
-                    const score =
-                      scores[index] || Math.floor(Math.random() * 40 + 60);
-                    const growthTrends = ["+24%", "+18%", "+12%"];
-                    const isSelected = selectedTopic === topic;
-                    return (
-                      <div
-                        key={index}
-                        onClick={() => setSelectedTopic(isSelected ? undefined : topic)}
-                        className={cn(
-                          "flex items-center justify-between p-2.5 border rounded-lg transition-all duration-300 group cursor-pointer",
-                          isSelected
-                            ? "bg-orange-50 border-valasys-orange bg-gradient-to-r from-orange-50 to-orange-100 shadow-md"
-                            : "bg-gray-50 border-gray-200 hover:border-valasys-orange hover:bg-orange-50"
-                        )}
-                      >
-                        <div className="flex items-center space-x-2 flex-1 min-w-0">
-                          <div className={cn(
-                            "w-1.5 h-1.5 rounded-full flex-shrink-0 transition-all",
-                            isSelected ? "bg-valasys-orange w-2 h-2" : "bg-valasys-orange"
-                          )}></div>
-                          <span className={cn(
-                            "text-xs font-medium truncate transition-colors",
-                            isSelected ? "text-valasys-orange font-semibold" : "text-gray-700"
-                          )}>
-                            {topic}
-                          </span>
-                          {isSelected && (
-                            <span className="text-xs text-valasys-orange ml-1">✓</span>
-                          )}
-                        </div>
-                        <div className="flex items-center space-x-2 flex-shrink-0 ml-2">
-                          <Badge className={cn(
-                            "font-semibold text-xs px-2 transition-colors",
+            {/* Scrollable Content Section */}
+            <div className="flex-1 overflow-auto p-5">
+              <div className="space-y-6">
+                {/* Topics Section */}
+                <div>
+                  <h3 className="text-sm font-bold text-gray-900 mb-2.5 flex items-center space-x-2">
+                    <div className="w-1 h-4 bg-gradient-to-b from-valasys-orange to-orange-500 rounded-full"></div>
+                    <span>Top Topics</span>
+                    <span className="text-xs font-normal text-gray-500">(Click to view specific intent trend)</span>
+                  </h3>
+                  <div className="space-y-1.5">
+                    {data.relatedTopics.slice(0, 3).map((topic, index) => {
+                      const scores = [65, 63, 58];
+                      const score =
+                        scores[index] || Math.floor(Math.random() * 40 + 60);
+                      const growthTrends = ["+24%", "+18%", "+12%"];
+                      const isSelected = selectedTopic === topic;
+                      return (
+                        <div
+                          key={index}
+                          onClick={() => setSelectedTopic(isSelected ? undefined : topic)}
+                          className={cn(
+                            "flex items-center justify-between p-2.5 border rounded-lg transition-all duration-300 group cursor-pointer",
                             isSelected
-                              ? "bg-valasys-orange text-white border border-valasys-orange"
-                              : "bg-yellow-100 text-yellow-800 border border-yellow-200"
-                          )}>
-                            {score}
-                          </Badge>
-                          <span className="text-xs font-semibold text-emerald-600 w-10 text-right">
-                            {growthTrends[index]}
-                          </span>
+                              ? "bg-orange-50 border-valasys-orange bg-gradient-to-r from-orange-50 to-orange-100 shadow-md"
+                              : "bg-gray-50 border-gray-200 hover:border-valasys-orange hover:bg-orange-50"
+                          )}
+                        >
+                          <div className="flex items-center space-x-2 flex-1 min-w-0">
+                            <div className={cn(
+                              "w-1.5 h-1.5 rounded-full flex-shrink-0 transition-all",
+                              isSelected ? "bg-valasys-orange w-2 h-2" : "bg-valasys-orange"
+                            )}></div>
+                            <span className={cn(
+                              "text-xs font-medium truncate transition-colors",
+                              isSelected ? "text-valasys-orange font-semibold" : "text-gray-700"
+                            )}>
+                              {topic}
+                            </span>
+                            {isSelected && (
+                              <span className="text-xs text-valasys-orange ml-1">✓</span>
+                            )}
+                          </div>
+                          <div className="flex items-center space-x-2 flex-shrink-0 ml-2">
+                            <Badge className={cn(
+                              "font-semibold text-xs px-2 transition-colors",
+                              isSelected
+                                ? "bg-valasys-orange text-white border border-valasys-orange"
+                                : "bg-yellow-100 text-yellow-800 border border-yellow-200"
+                            )}>
+                              {score}
+                            </Badge>
+                            <span className="text-xs font-semibold text-emerald-600 w-10 text-right">
+                              {growthTrends[index]}
+                            </span>
+                          </div>
                         </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
 
-              {/* Footer Info */}
-              <div className="border-t border-gray-200 pt-4 mt-2">
-                <div className="bg-gradient-to-r from-valasys-orange/10 to-orange-500/10 border border-orange-200/50 rounded-lg p-3">
-                  <p className="text-xs text-gray-700">
-                    <span className="text-valasys-orange font-bold">
-                      💡 Insight:
-                    </span>{" "}
-                    This company shows strong intent signals across multiple
-                    topics with consistent week-over-week growth. Click the
-                    chart for deeper analysis.
-                  </p>
+                {/* Footer Info */}
+                <div className="border-t border-gray-200 pt-4 mt-2">
+                  <div className="bg-gradient-to-r from-valasys-orange/10 to-orange-500/10 border border-orange-200/50 rounded-lg p-3">
+                    <p className="text-xs text-gray-700">
+                      <span className="text-valasys-orange font-bold">
+                        💡 Insight:
+                      </span>{" "}
+                      This company shows strong intent signals across multiple
+                      topics with consistent week-over-week growth. Click the
+                      chart for deeper analysis.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
