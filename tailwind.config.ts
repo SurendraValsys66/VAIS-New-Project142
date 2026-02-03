@@ -114,7 +114,7 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "smooth-pulse": "smooth-pulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        "badge-popup": "badge-popup 1s cubic-bezier(0.34, 1.56, 0.64, 1) infinite",
       },
     },
   },
