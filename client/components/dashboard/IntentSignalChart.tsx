@@ -22,7 +22,7 @@ interface IntentSignalChartProps {
   isLocked?: boolean;
   onLockClick?: () => void;
   itemId?: string;
-  onAddToList?: (itemId: string) => void;
+  onAddToList?: (itemId: string, checked: boolean) => void;
 }
 
 const getIntentSignalColor = (signal: string) => {
