@@ -47,6 +47,8 @@ export default function IntentSignalChart({
   className,
   isLocked = false,
   onLockClick,
+  itemId,
+  onAddToList,
 }: IntentSignalChartProps) {
   if (isLocked) {
     return (
