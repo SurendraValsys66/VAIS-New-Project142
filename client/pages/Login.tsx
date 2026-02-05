@@ -555,9 +555,6 @@ export default function Login() {
                 Revolution Starts Here
               </span>
             </h2>
-            <p className="text-xs text-valasys-gray-600 mt-1 lg:mt-1.5">
-              Unlock your AI-powered selling platform to uncover deeper insights, accelerate decision-making, and drive intelligent business outcomes.
-            </p>
           </div>
 
           {/* Main Content Container */}
