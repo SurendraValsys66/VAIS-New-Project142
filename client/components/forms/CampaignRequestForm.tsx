@@ -364,6 +364,7 @@ function FileUpload({ onFileChange, file }: FileUploadProps) {
 interface DeliverablesDialogProps {
   jobTitles: string[];
   jobFunctions: string[];
+  jobLevels: string[];
   geolocations: string[];
   industries: string[];
   campaignName: string;
