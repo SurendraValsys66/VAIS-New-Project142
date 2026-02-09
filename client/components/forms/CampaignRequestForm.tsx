@@ -705,12 +705,14 @@ function DeliverablesDialog({
                         <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 bg-gray-50">
                           Employee Size
                         </th>
-                        <th className="px-6 py-3 text-center text-xs font-semibold text-gray-700 bg-gray-50">
-                          {geolocations.length > 0 ? geolocations[0] : "Geography 1"}
-                        </th>
-                        <th className="px-6 py-3 text-center text-xs font-semibold text-gray-700 bg-gray-50">
-                          {geolocations.length > 1 ? geolocations[1] : "Geography 2"}
-                        </th>
+                        {selectedGeolocations.map((geo) => (
+                          <th
+                            key={geo}
+                            className="px-6 py-3 text-center text-xs font-semibold text-gray-700 bg-gray-50"
+                          >
+                            {geo}
+                          </th>
+                        ))}
                         <th className="px-6 py-3 text-center text-xs font-semibold text-gray-700 bg-emerald-50 font-bold">
                           Total
                         </th>
@@ -718,13 +720,10 @@ function DeliverablesDialog({
                     </thead>
                     <tbody>
                       {employeeSizeList.map((size, index) => {
-                        const geo1 =
-                          employeeSizeData[size]?.[geolocations[0] || "Geo1"] ||
-                          0;
-                        const geo2 =
-                          employeeSizeData[size]?.[geolocations[1] || "Geo2"] ||
-                          0;
-                        const total = geo1 + geo2;
+                        const sizeTotal = selectedGeolocations.reduce(
+                          (sum, geo) => sum + (employeeSizeData[size]?.[geo] || 0),
+                          0,
+                        );
                         return (
                           <tr
                             key={size}
@@ -733,14 +732,16 @@ function DeliverablesDialog({
                             <td className="px-6 py-3 text-sm font-medium text-gray-900">
                               {size}
                             </td>
-                            <td className="px-6 py-3 text-sm text-center text-gray-600">
-                              {geo1}
-                            </td>
-                            <td className="px-6 py-3 text-sm text-center text-gray-600">
-                              {geo2}
-                            </td>
+                            {selectedGeolocations.map((geo) => (
+                              <td
+                                key={geo}
+                                className="px-6 py-3 text-sm text-center text-gray-600"
+                              >
+                                {employeeSizeData[size]?.[geo] || 0}
+                              </td>
+                            ))}
                             <td className="px-6 py-3 text-sm text-center font-bold text-emerald-600">
-                              {total}
+                              {sizeTotal}
                             </td>
                           </tr>
                         );
@@ -749,38 +750,20 @@ function DeliverablesDialog({
                         <td className="px-6 py-3 text-sm text-gray-900">
                           Total
                         </td>
-                        <td className="px-6 py-3 text-sm text-center text-gray-900">
-                          {employeeSizeList.reduce(
-                            (sum, size) =>
-                              sum +
-                              (employeeSizeData[size]?.[
-                                geolocations[0] || "Geo1"
-                              ] || 0),
-                            0,
-                          )}
-                        </td>
-                        <td className="px-6 py-3 text-sm text-center text-gray-900">
-                          {employeeSizeList.reduce(
-                            (sum, size) =>
-                              sum +
-                              (employeeSizeData[size]?.[
-                                geolocations[1] || "Geo2"
-                              ] || 0),
-                            0,
-                          )}
-                        </td>
+                        {selectedGeolocations.map((geo) => (
+                          <td
+                            key={geo}
+                            className="px-6 py-3 text-sm text-center text-gray-900"
+                          >
+                            {employeeSizeList.reduce(
+                              (sum, size) =>
+                                sum + (employeeSizeData[size]?.[geo] || 0),
+                              0,
+                            )}
+                          </td>
+                        ))}
                         <td className="px-6 py-3 text-sm text-center text-emerald-700">
-                          {employeeSizeList.reduce(
-                            (sum, size) =>
-                              sum +
-                              ((employeeSizeData[size]?.[
-                                geolocations[0] || "Geo1"
-                              ] || 0) +
-                                (employeeSizeData[size]?.[
-                                  geolocations[1] || "Geo2"
-                                ] || 0)),
-                            0,
-                          )}
+                          {employeeSizeTotal}
                         </td>
                       </tr>
                     </tbody>
