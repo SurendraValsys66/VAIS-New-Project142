@@ -384,6 +384,7 @@ function DeliverablesDialog({
   employeeSize,
   revenue,
   userHasFullPermission = true,
+  isFormValid = true,
 }: DeliverablesDialogProps) {
   const [open, setOpen] = useState(false);
   const [campaignStatus, setCampaignStatus] = useState<CampaignStatus>("pending");
