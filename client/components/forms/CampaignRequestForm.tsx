@@ -931,6 +931,7 @@ function DeliverablesDialog({
               onClick={() => {
                 setCampaignStatus("accepted");
                 setShowConfirmation(false);
+                setOpen(false);
               }}
               className="flex-1 bg-green-600 hover:bg-green-700 text-white"
             >
