@@ -370,6 +370,7 @@ interface DeliverablesDialogProps {
   employeeSize: string;
   revenue: string;
   userHasFullPermission?: boolean;
+  isFormValid?: boolean;
 }
 
 type CampaignStatus = "pending" | "accepted" | "declined";
