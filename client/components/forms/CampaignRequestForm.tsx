@@ -655,58 +655,6 @@ function DeliverablesDialog({
           </Tabs>
 
 
-          {/* Campaign Criteria Summary */}
-          <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
-            <h3 className="font-semibold text-gray-900 mb-5 flex items-center gap-2">
-              <Target className="w-4 h-4 text-gray-600" />
-              Campaign Criteria Summary
-            </h3>
-            <div className="grid grid-cols-2 gap-6">
-              <div>
-                <p className="text-xs text-gray-600 font-medium mb-1">Campaign Name</p>
-                <p className="text-sm font-semibold text-gray-900">
-                  {campaignName || "Not specified"}
-                </p>
-              </div>
-
-              <div>
-                <p className="text-xs text-gray-600 font-medium mb-1">Job Titles Selected</p>
-                <p className="text-sm font-semibold text-gray-900">
-                  {jobTitles.length} title{jobTitles.length !== 1 ? "s" : ""}
-                </p>
-              </div>
-
-              <div>
-                <p className="text-xs text-gray-600 font-medium mb-1">Employee Size</p>
-                <p className="text-sm font-semibold text-gray-900">
-                  {employeeSize || "Not specified"}
-                </p>
-              </div>
-
-              <div>
-                <p className="text-xs text-gray-600 font-medium mb-1">Job Functions Selected</p>
-                <p className="text-sm font-semibold text-gray-900">
-                  {jobFunctions.length} function{jobFunctions.length !== 1 ? "s" : ""}
-                </p>
-              </div>
-
-              <div>
-                <p className="text-xs text-gray-600 font-medium mb-1">Revenue Range</p>
-                <p className="text-sm font-semibold text-gray-900">
-                  {revenue || "Not specified"}
-                </p>
-              </div>
-
-              <div>
-                <p className="text-xs text-gray-600 font-medium mb-1">Industries Selected</p>
-                <p className="text-sm font-semibold text-gray-900">
-                  {industries.length} industr{industries.length !== 1 ? "ies" : "y"}
-                </p>
-              </div>
-            </div>
-          </div>
-
-
           {/* Important Information */}
           <div className="bg-blue-50 rounded-lg p-6 border border-blue-200">
             <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
