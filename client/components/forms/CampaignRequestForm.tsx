@@ -496,18 +496,20 @@ function DeliverablesDialog({
   // Limit geolocations to top 5
   const selectedGeolocations = geolocations.slice(0, 5);
 
-  // Generate Database Reach data by Job Level
-  const jobLevelList = [
+  // Use only selected job levels (no limit)
+  const selectedJobLevels = jobLevels.length > 0 ? jobLevels : [
     "C-Level",
     "Vice President",
     "Director",
     "Manager",
     "Staff",
   ];
+
+  // Generate Database Reach data by Job Level
   const generateJobLevelData = () => {
     const data: { [key: string]: { [key: string]: number } } = {};
 
-    jobLevelList.forEach((level) => {
+    selectedJobLevels.forEach((level) => {
       data[level] = {};
       selectedGeolocations.forEach((geo) => {
         data[level][geo] = Math.floor(Math.random() * 50) + 30;
@@ -520,7 +522,7 @@ function DeliverablesDialog({
   const jobLevelData = generateJobLevelData();
 
   // Calculate Job Level total count
-  const jobLevelTotal = jobLevelList.reduce((sum, level) => {
+  const jobLevelTotal = selectedJobLevels.reduce((sum, level) => {
     const levelTotal = selectedGeolocations.reduce(
       (geoSum, geo) => geoSum + (jobLevelData[level]?.[geo] || 0),
       0,
@@ -528,8 +530,8 @@ function DeliverablesDialog({
     return sum + levelTotal;
   }, 0);
 
-  // Generate Database Reach data by Employee Size
-  const employeeSizeList = [
+  // Use only selected employee sizes (no limit)
+  const selectedEmployeeSizeList = employeeSize ? [employeeSize] : [
     "1-10",
     "11-50",
     "51-200",
@@ -539,14 +541,15 @@ function DeliverablesDialog({
     "5001-10,000",
     "10,000+",
   ];
+
+  // Generate Database Reach data by Employee Size
   const generateEmployeeSizeData = () => {
     const data: { [key: string]: { [key: string]: number } } = {};
 
-    employeeSizeList.forEach((size) => {
-      const isSelectedSize = size === employeeSize;
+    selectedEmployeeSizeList.forEach((size) => {
       data[size] = {};
       selectedGeolocations.forEach((geo) => {
-        data[size][geo] = isSelectedSize ? Math.floor(Math.random() * 200) + 100 : 0;
+        data[size][geo] = Math.floor(Math.random() * 200) + 100;
       });
     });
 
@@ -556,7 +559,7 @@ function DeliverablesDialog({
   const employeeSizeData = generateEmployeeSizeData();
 
   // Calculate Employee Size total count
-  const employeeSizeTotal = employeeSizeList.reduce((sum, size) => {
+  const employeeSizeTotal = selectedEmployeeSizeList.reduce((sum, size) => {
     const sizeTotal = selectedGeolocations.reduce(
       (geoSum, geo) => geoSum + (employeeSizeData[size]?.[geo] || 0),
       0,
