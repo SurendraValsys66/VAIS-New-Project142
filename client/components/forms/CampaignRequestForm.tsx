@@ -391,6 +391,7 @@ function DeliverablesDialog({
   revenue,
   userHasFullPermission = true,
   isFormValid = true,
+  selectedAssets = [],
 }: DeliverablesDialogProps) {
   const [open, setOpen] = useState(false);
   const [campaignStatus, setCampaignStatus] =
