@@ -27,7 +27,6 @@ interface AIEmailGeneratorModalProps {
   jobLevels: string[];
   geolocations: string[];
   industries: string[];
-  onAddToAssets: () => void;
 }
 
 interface EmailSample {
