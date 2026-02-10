@@ -251,7 +251,7 @@ ${campaignName}`,
                     type="file"
                     id="file-upload"
                     multiple
-                    accept=".pdf,.doc,.docx,.ppt,.pptx,.jpg,.jpeg,.png,.gif"
+                    accept=".pdf,.doc,.docx,.ppt,.pptx,.jpg,.jpeg,.png,.gif,.xls,.xlsx,.csv"
                     onChange={handleFileUpload}
                     className="hidden"
                   />
