@@ -1030,6 +1030,7 @@ export default function CampaignRequestForm() {
   const onSubmit = (data: CampaignFormData) => {
     console.log("Form submitted:", data);
     console.log("Uploaded file:", uploadedFile);
+    console.log("Selected assets:", selectedAssets);
   };
 
   const isFormValid = () => {
