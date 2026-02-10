@@ -278,9 +278,9 @@ ${campaignName}`,
 
               {/* Uploaded Files List */}
               {uploadedFiles.length > 0 && (
-                <div className="space-y-2">
-                  <p className="text-xs font-semibold text-gray-700 mb-3">
-                    Attached Files ({uploadedFiles.length})
+                <div className="space-y-3 bg-green-50 border border-green-200 rounded-lg p-3">
+                  <p className="text-xs font-semibold text-green-900 mb-2">
+                    ✓ Attached Files ({uploadedFiles.length})
                   </p>
                   <div className="flex flex-wrap gap-3">
                     {uploadedFiles.map((file, index) => {
