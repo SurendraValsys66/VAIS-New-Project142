@@ -74,8 +74,12 @@ const campaignFormSchema = z.object({
     .min(1, "At least one job function is required"),
   jobLevels: z.array(z.string()).min(1, "At least one job level is required"),
   geolocations: z.array(z.string()).min(1, "At least one location is required"),
-  employeeSize: z.array(z.string()).min(1, "At least one employee size is required"),
-  revenue: z.array(z.string()).min(1, "At least one revenue option is required"),
+  employeeSize: z
+    .array(z.string())
+    .min(1, "At least one employee size is required"),
+  revenue: z
+    .array(z.string())
+    .min(1, "At least one revenue option is required"),
   industries: z.array(z.string()).min(1, "At least one industry is required"),
   talFile: z.any().optional(),
   campaignAssets: z.array(z.any()).optional().default([]),
@@ -199,7 +203,8 @@ function MultiSelect({
     }
   };
 
-  const isAllSelected = selected.length === options.length && options.length > 0;
+  const isAllSelected =
+    selected.length === options.length && options.length > 0;
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -563,18 +568,19 @@ function DeliverablesDialog({
   }, 0);
 
   // Use only selected employee sizes (no limit)
-  const selectedEmployeeSizeList = employeeSize && employeeSize.length > 0
-    ? employeeSize
-    : [
-        "1-10",
-        "11-50",
-        "51-200",
-        "201-500",
-        "501-1000",
-        "1001-5000",
-        "5001-10,000",
-        "10,000+",
-      ];
+  const selectedEmployeeSizeList =
+    employeeSize && employeeSize.length > 0
+      ? employeeSize
+      : [
+          "1-10",
+          "11-50",
+          "51-200",
+          "201-500",
+          "501-1000",
+          "1001-5000",
+          "5001-10,000",
+          "10,000+",
+        ];
 
   // Generate Database Reach data by Employee Size
   const generateEmployeeSizeData = () => {

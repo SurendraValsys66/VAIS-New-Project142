@@ -125,9 +125,7 @@ export function AIEmailGeneratorModal({
       // Build feature list for emails
       const featureList =
         details.features.length > 0
-          ? details.features
-              .map((f) => `• ${f.trim()}`)
-              .join("\n")
+          ? details.features.map((f) => `• ${f.trim()}`).join("\n")
           : `• ${details.productName} streamlines ${primaryFunction}\n• Improves team productivity\n• Reduces manual work`;
 
       const attachmentNote =

@@ -55,7 +55,7 @@ const formatFileSize = (bytes: number) => {
   const k = 1024;
   const sizes = ["B", "KB", "MB"];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
-  return Math.round(bytes / Math.pow(k, i) * 100) / 100 + " " + sizes[i];
+  return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + " " + sizes[i];
 };
 
 export function ChatGPTLikeInput({
@@ -100,7 +100,16 @@ export function ChatGPTLikeInput({
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const files = Array.from(e.target.files);
-      const validExtensions = ["pdf", "doc", "docx", "ppt", "pptx", "csv", "xls", "xlsx"];
+      const validExtensions = [
+        "pdf",
+        "doc",
+        "docx",
+        "ppt",
+        "pptx",
+        "csv",
+        "xls",
+        "xlsx",
+      ];
       const maxFileSize = 5 * 1024 * 1024; // 5 MB
 
       const validFiles = files.filter((file) => {
@@ -166,7 +175,7 @@ export function ChatGPTLikeInput({
           isFocused
             ? "border-blue-400 shadow-lg shadow-blue-500/10"
             : "border-gray-200 shadow-sm hover:shadow-md",
-          disabled && "opacity-60 cursor-not-allowed"
+          disabled && "opacity-60 cursor-not-allowed",
         )}
       >
         <div className="flex items-end gap-2 p-3">
@@ -178,7 +187,7 @@ export function ChatGPTLikeInput({
               "p-2 rounded-lg transition-colors flex-shrink-0",
               isLoading || disabled
                 ? "text-gray-300 cursor-not-allowed"
-                : "text-gray-500 hover:text-blue-600 hover:bg-blue-50"
+                : "text-gray-500 hover:text-blue-600 hover:bg-blue-50",
             )}
             title="Attach files (.pdf, .docx, .doc, .ppt, .pptx, .csv, .xls, .xlsx - Max 5MB)"
           >
@@ -200,7 +209,7 @@ export function ChatGPTLikeInput({
                 "w-full bg-transparent resize-none outline-none text-sm leading-relaxed",
                 "placeholder-gray-400 text-gray-900",
                 "min-h-14 max-h-60 overflow-y-auto",
-                disabled && "cursor-not-allowed"
+                disabled && "cursor-not-allowed",
               )}
               style={{
                 height: "56px", // Initial height (2 lines)
@@ -220,7 +229,7 @@ export function ChatGPTLikeInput({
               "p-2 rounded-lg transition-all duration-200 flex-shrink-0",
               value.trim() && !isLoading && !disabled
                 ? "bg-blue-600 hover:bg-blue-700 text-white shadow-md hover:shadow-lg"
-                : "bg-gray-100 text-gray-400 cursor-not-allowed"
+                : "bg-gray-100 text-gray-400 cursor-not-allowed",
             )}
             title={
               value.trim()
@@ -249,10 +258,19 @@ export function ChatGPTLikeInput({
 
       {/* Helper Text */}
       <p className="text-xs text-gray-500 px-1">
-        Tip: Press <kbd className="px-1.5 py-0.5 bg-gray-100 rounded border border-gray-300 text-gray-700 font-mono text-xs">Ctrl</kbd>
+        Tip: Press{" "}
+        <kbd className="px-1.5 py-0.5 bg-gray-100 rounded border border-gray-300 text-gray-700 font-mono text-xs">
+          Ctrl
+        </kbd>
         <span className="mx-0.5">+</span>
-        <kbd className="px-1.5 py-0.5 bg-gray-100 rounded border border-gray-300 text-gray-700 font-mono text-xs">Enter</kbd>
-        to submit, or just press <kbd className="px-1.5 py-0.5 bg-gray-100 rounded border border-gray-300 text-gray-700 font-mono text-xs">Enter</kbd> for a new line
+        <kbd className="px-1.5 py-0.5 bg-gray-100 rounded border border-gray-300 text-gray-700 font-mono text-xs">
+          Enter
+        </kbd>
+        to submit, or just press{" "}
+        <kbd className="px-1.5 py-0.5 bg-gray-100 rounded border border-gray-300 text-gray-700 font-mono text-xs">
+          Enter
+        </kbd>{" "}
+        for a new line
       </p>
     </div>
   );
