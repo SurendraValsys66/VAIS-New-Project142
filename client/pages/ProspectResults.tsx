@@ -84,6 +84,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Switch } from "@/components/ui/switch";
 import { cn, Link } from "@/lib/utils";
+import { useNavigate } from "react-router-dom";
 import { FloatingStatsWidget } from "@/components/ui/floating-stats-widget";
 import { markStepCompleted } from "@/lib/masteryStorage";
 import { useToast } from "@/hooks/use-toast";
