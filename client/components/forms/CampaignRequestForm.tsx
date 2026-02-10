@@ -1396,20 +1396,8 @@ export default function CampaignRequestForm() {
                         <button
                           type="button"
                           onClick={() => {
-                            const emailTemplateAsset: SelectedAsset = {
-                              id: "email-template",
-                              type: "landing-page",
-                              name: "Email Template Builder",
-                              description:
-                                "Design custom email templates with drag-and-drop editor",
-                              config: {},
-                            };
-                            if (
-                              !selectedAssets.some((a) => a.id === emailTemplateAsset.id)
-                            ) {
-                              setSelectedAssets([...selectedAssets, emailTemplateAsset]);
-                            }
                             setLandingPageDropdownOpen(false);
+                            navigate("/templates");
                           }}
                           className="px-4 py-3 text-xs text-left hover:bg-purple-50 border-b border-gray-200 flex items-center gap-2 transition-colors"
                         >
@@ -1418,29 +1406,14 @@ export default function CampaignRequestForm() {
                             <p className="font-medium text-gray-900">Email Template Builder</p>
                             <p className="text-xs text-gray-600">Design custom email templates</p>
                           </div>
-                          {selectedAssets.some((a) => a.id === "email-template") && (
-                            <Check className="w-4 h-4 text-green-600" />
-                          )}
                         </button>
 
                         {/* Landing Page Builder Option */}
                         <button
                           type="button"
                           onClick={() => {
-                            const pageAsset: SelectedAsset = {
-                              id: "landing-page",
-                              type: "landing-page",
-                              name: "Landing Page Builder",
-                              description:
-                                "Create conversion-optimized landing pages matched to your campaign",
-                              config: {},
-                            };
-                            if (
-                              !selectedAssets.some((a) => a.id === pageAsset.id)
-                            ) {
-                              setSelectedAssets([...selectedAssets, pageAsset]);
-                            }
                             setLandingPageDropdownOpen(false);
+                            navigate("/landing-pages");
                           }}
                           className="px-4 py-3 text-xs text-left hover:bg-purple-50 flex items-center gap-2 transition-colors"
                         >
@@ -1449,9 +1422,6 @@ export default function CampaignRequestForm() {
                             <p className="font-medium text-gray-900">Landing Page Builder</p>
                             <p className="text-xs text-gray-600">Create conversion-optimized pages</p>
                           </div>
-                          {selectedAssets.some((a) => a.id === "landing-page") && (
-                            <Check className="w-4 h-4 text-green-600" />
-                          )}
                         </button>
                       </div>
                     </PopoverContent>
