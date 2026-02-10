@@ -1353,25 +1353,7 @@ export default function CampaignRequestForm() {
                   {/* AI Email Generator Button */}
                   <button
                     type="button"
-                    onClick={() => {
-                      const emailAsset: SelectedAsset = {
-                        id: "email-gen",
-                        type: "email",
-                        name: "AI Email Generator",
-                        description:
-                          "Generate personalized emails with AI-powered subject lines and body copy",
-                        config: {},
-                      };
-                      if (
-                        selectedAssets.some((a) => a.id === emailAsset.id)
-                      ) {
-                        setSelectedAssets(
-                          selectedAssets.filter((a) => a.id !== emailAsset.id),
-                        );
-                      } else {
-                        setSelectedAssets([...selectedAssets, emailAsset]);
-                      }
-                    }}
+                    onClick={() => setEmailGeneratorOpen(true)}
                     className={cn(
                       "py-2 px-3 rounded-lg text-xs font-medium transition-all border-2 flex items-center justify-center gap-2",
                       selectedAssets.some((a) => a.id === "email-gen")
@@ -1380,7 +1362,7 @@ export default function CampaignRequestForm() {
                     )}
                   >
                     <Mail className="w-3 h-3" />
-                    <span>Email Gen</span>
+                    <span>AI Email Generator</span>
                     {selectedAssets.some((a) => a.id === "email-gen") && (
                       <Check className="w-3 h-3 ml-auto" />
                     )}
