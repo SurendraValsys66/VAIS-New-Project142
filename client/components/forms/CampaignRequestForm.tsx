@@ -1067,25 +1067,18 @@ export default function CampaignRequestForm() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-xs font-medium">
-                        Revenue
+                        Revenue *
                       </FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        value={field.value}
-                      >
-                        <FormControl>
-                          <SelectTrigger className="h-9 text-sm">
-                            <SelectValue placeholder="Select revenue range" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          {revenueOptions.map((revenue) => (
-                            <SelectItem key={revenue} value={revenue}>
-                              {revenue}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                      <FormControl>
+                        <MultiSelect
+                          options={revenueOptions}
+                          selected={field.value}
+                          onSelectedChange={field.onChange}
+                          placeholder="Select revenue ranges"
+                          searchPlaceholder="Search..."
+                          showSelectAll={true}
+                        />
+                      </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
