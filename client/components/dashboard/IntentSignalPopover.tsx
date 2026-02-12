@@ -142,7 +142,7 @@ export default function IntentSignalPopover({
 }: IntentSignalPopoverProps) {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedTopic, setSelectedTopic] = useState<string | undefined>();
+  const [selectedTopic, setSelectedTopic] = useState<string | undefined>(data.relatedTopics[0]);
   const chartData = generateChartData(data, selectedTopic);
   const [isAdded, setIsAdded] = useState(false);
   const [expandedTopics, setExpandedTopics] = useState<Set<number>>(new Set([0]));
@@ -581,18 +581,17 @@ export default function IntentSignalPopover({
                       };
 
                       const toggleExpand = () => {
-                        const newExpanded = new Set(expandedTopics);
-                        if (newExpanded.has(index)) {
-                          newExpanded.delete(index);
+                        const newExpanded = new Set<number>();
+
+                        // If clicking the already expanded topic, collapse it
+                        if (expandedTopics.has(index)) {
+                          setExpandedTopics(newExpanded);
+                          setSelectedTopic(undefined);
                         } else {
+                          // Open only this topic
                           newExpanded.add(index);
-                        }
-                        setExpandedTopics(newExpanded);
-                        // Auto-select topic when expanded
-                        if (!newExpanded.has(index)) {
-                          setSelectedTopic(undefined); // Deselect when collapsing
-                        } else {
-                          setSelectedTopic(topic); // Select when expanding
+                          setExpandedTopics(newExpanded);
+                          setSelectedTopic(topic); // Auto-select when expanding
                         }
                       };
 
