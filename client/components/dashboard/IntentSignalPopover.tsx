@@ -588,6 +588,12 @@ export default function IntentSignalPopover({
                           newExpanded.add(index);
                         }
                         setExpandedTopics(newExpanded);
+                        // Auto-select topic when expanded
+                        if (!newExpanded.has(index)) {
+                          setSelectedTopic(undefined); // Deselect when collapsing
+                        } else {
+                          setSelectedTopic(topic); // Select when expanding
+                        }
                       };
 
                       return (
@@ -598,7 +604,10 @@ export default function IntentSignalPopover({
                           {/* Header */}
                           <button
                             onClick={toggleExpand}
-                            className="w-full px-4 py-3 flex items-center justify-between hover:bg-gray-50 transition-colors group"
+                            className={cn(
+                              "w-full px-4 py-3 flex items-center justify-between transition-all group",
+                              isSelected ? "bg-orange-50 hover:bg-orange-100" : "hover:bg-gray-50"
+                            )}
                           >
                             <div className="flex items-center gap-3 flex-1 text-left">
                               {/* Score Badge */}
@@ -608,21 +617,39 @@ export default function IntentSignalPopover({
 
                               {/* Topic Name */}
                               <div className="flex-1 min-w-0">
-                                <h4 className="text-sm font-semibold text-gray-900 group-hover:text-valasys-orange transition-colors">
+                                <h4 className={cn(
+                                  "text-sm font-semibold transition-colors",
+                                  isSelected
+                                    ? "text-valasys-orange"
+                                    : "text-gray-900 group-hover:text-valasys-orange"
+                                )}>
                                   {currentTopic.name}
                                 </h4>
                               </div>
+
+                              {/* Selected Indicator */}
+                              {isSelected && (
+                                <div className="flex items-center gap-1.5 text-xs text-valasys-orange font-semibold flex-shrink-0 ml-2">
+                                  <div className="w-1.5 h-1.5 bg-valasys-orange rounded-full animate-pulse" />
+                                  Active
+                                </div>
+                              )}
                             </div>
 
                             {/* Expand/Collapse Icon */}
                             <div className="flex-shrink-0 ml-2">
                               <div className={cn(
-                                "w-5 h-5 flex items-center justify-center rounded-full bg-gray-100 group-hover:bg-orange-50 transition-all",
-                                isExpanded && "bg-valasys-orange/10"
+                                "w-5 h-5 flex items-center justify-center rounded-full transition-all",
+                                isSelected
+                                  ? "bg-valasys-orange/20"
+                                  : "bg-gray-100 group-hover:bg-orange-50"
                               )}>
                                 <ChevronRight className={cn(
-                                  "w-4 h-4 text-gray-600 group-hover:text-valasys-orange transition-all",
-                                  isExpanded && "rotate-90 text-valasys-orange"
+                                  "w-4 h-4 transition-all",
+                                  isSelected
+                                    ? "text-valasys-orange"
+                                    : "text-gray-600 group-hover:text-valasys-orange",
+                                  isExpanded && "rotate-90"
                                 )} />
                               </div>
                             </div>
@@ -677,22 +704,12 @@ export default function IntentSignalPopover({
                                 </div>
                               </div>
 
-                              {/* Divider */}
-                              <div className="border-t border-gray-200 pt-3 flex gap-2">
-                                {/* View Trend Button */}
-                                <button
-                                  onClick={() => {
-                                    setSelectedTopic(selectedTopic === topic ? undefined : topic);
-                                  }}
-                                  className={cn(
-                                    "flex-1 px-3 py-2 rounded-lg text-xs font-medium transition-all",
-                                    selectedTopic === topic
-                                      ? "bg-valasys-orange text-white border border-valasys-orange"
-                                      : "bg-orange-50 text-valasys-orange border border-orange-200 hover:border-valasys-orange hover:bg-orange-100"
-                                  )}
-                                >
-                                  {selectedTopic === topic ? "✓ Viewing Trend" : "View Trend"}
-                                </button>
+                              {/* Status Indicator */}
+                              <div className="border-t border-gray-200 pt-3">
+                                <div className="flex items-center gap-2 text-xs text-valasys-orange font-medium">
+                                  <div className="w-2 h-2 bg-valasys-orange rounded-full animate-pulse" />
+                                  Intent Trend Showing
+                                </div>
                               </div>
                             </div>
                           )}
